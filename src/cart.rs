@@ -72,7 +72,7 @@ impl Default for Cart {
             m1,
             m2,
             m3,
-            pid: (40., 8., 2.5),
+            pid: (10.0, 0.0, 0.0),
             steps: 5,
             enable: true,
             integrator: Integrator::default(),
@@ -91,7 +91,7 @@ impl Cart {
         };
         let dt = dt / steps as f64;
         for _ in 0..steps {
-            self.error = PI - self.state.th;
+            self.error = (PI - self.state.th).abs().sqrt();
             self.int += self.error * dt;
             self.F = 0.;
             if self.enable {
